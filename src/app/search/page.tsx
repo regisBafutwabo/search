@@ -1,9 +1,8 @@
-import { Skeleton } from '@/components/common/Skeleton';
+import { ErrorModal } from '@/components/ErrorModal';
 import { ResultsHeader } from '@/components/ResultsHeader';
+import { Skeleton } from '@/components/Shared/Skeleton';
 
 export default function Search() {
-  const handleSave = () => {};
-
   return (
     <div className="h-full">
       <ResultsHeader />
@@ -12,6 +11,7 @@ export default function Search() {
           <Skeleton key={index} />
         ))} */}
         <Skeleton />
+        <ErrorModal/>
       </div>
     </div>
   );

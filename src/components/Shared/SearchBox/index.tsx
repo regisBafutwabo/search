@@ -1,8 +1,11 @@
 "use client";
-import { type ChangeEventHandler, useState } from "react";
+import {
+  type ChangeEventHandler,
+  useState,
+} from 'react';
 
-import { CloseIcon } from "../../Icons/CloseIcon";
-import { SearchIcon } from "../../Icons/SearchIcons";
+import { FilledCloseIcon } from '../../Icons/FilledCloseIcon';
+import { SearchIcon } from '../../Icons/SearchIcons';
 
 type SearchBoxProps = {
   value: string;
@@ -43,7 +46,7 @@ export const SearchBox = ({
       />
       {value && fullWidth && (
         <button type="reset" className="cursor-pointer" onClick={onResetInput}>
-          <CloseIcon />
+          <FilledCloseIcon />
         </button>
       )}
     </div>

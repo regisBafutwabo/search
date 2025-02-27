@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { SearchBox } from "../common/SearchBox";
+import { SearchBox } from "../Shared/SearchBox";
 
 export const Search = () => {
   const [value, setValue] = useState("");

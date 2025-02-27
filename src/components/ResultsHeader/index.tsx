@@ -1,12 +1,8 @@
 "use client";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { SearchBox } from '../common/SearchBox';
-import { BackIcon } from '../Icons/BackIcon';
+import { SearchBox } from "../Shared/SearchBox";
+import { BackIcon } from "../Icons/BackIcon";
 
 export const ResultsHeader = () => {
   const [value, setValue] = useState("");

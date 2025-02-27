@@ -23,7 +23,7 @@
 
   .error-modal-title {
     font-size: 20px;
-    line-height: 23.87px;
+    line-height: normal;
     letter-spacing: normal;
     font-weight: 700;
   }
@@ -43,7 +43,7 @@
     color: #959CA6;
   }
 
-  .button {
+  .modal-button {
     font-size: 14px;
     line-height: 14px;
     letter-spacing: normal;
