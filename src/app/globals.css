@@ -60,4 +60,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sf-pro-text), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
 }

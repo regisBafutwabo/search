@@ -4,7 +4,7 @@ import { Search } from '@/components/Search';
 
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-center h-screen gap-20">
+    <div className="flex flex-col h-full justify-center items-center gap-20">
       <Image
         src="/images/logo.svg"
         unoptimized
