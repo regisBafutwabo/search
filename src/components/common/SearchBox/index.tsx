@@ -1,11 +1,8 @@
 "use client";
-import {
-  type ChangeEventHandler,
-  useState,
-} from 'react';
+import { type ChangeEventHandler, useState } from "react";
 
-import { CloseIcon } from '../../Icons/CloseIcon';
-import { SearchIcon } from '../../Icons/SearchIcons';
+import { CloseIcon } from "../../Icons/CloseIcon";
+import { SearchIcon } from "../../Icons/SearchIcons";
 
 type SearchBoxProps = {
   value: string;
@@ -32,14 +29,14 @@ export const SearchBox = ({
 
   return (
     <div
-      className={`flex gap-4 items-center h-12 border rounded-[1000px] px-4 py-3 ${isFocused ? "border-[#00C3CC] caret-[#00C3CC] border-[1.5px]" : "border-[#C2C6CE] hover:border-[#959CA6]"} ${fullWidth ? "w-[644px]" : "w-[560px]"}`}
+      className={`flex gap-4 items-center h-12 border rounded-[1000px] px-4 py-3 ${isFocused ? "border-bd-active caret-bd-active border-[1.5px]" : "border-bd-default hover:border-bd-hover"} ${fullWidth ? "w-[644px]" : "w-[560px]"}`}
     >
       {!fullWidth && <SearchIcon active={isFocused} />}
       <input
         value={value}
         onChange={onChange}
         placeholder="Search keyword"
-        className="w-full text-base/4 tracking-normal font-normal outline-none"
+        className="w-full search-box outline-none"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onKeyDown={handleKeyDown}

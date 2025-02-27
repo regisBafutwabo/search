@@ -39,7 +39,7 @@ export const ResultsHeader = () => {
         style={{ height: "0px", width: "100%", position: "absolute", top: 0 }}
       />
       <div
-        className={`flex items-center gap-3 h-20 sticky top-0 z-10 ${showBorder ? "border-b border-[#F2F3F7]" : ""}`}
+        className={`flex bg-white items-center pl-8 gap-3 h-20 sticky top-0 z-10 ${showBorder ? "border-b border-liner-gray" : ""}`}
       >
         <button
           type="button"

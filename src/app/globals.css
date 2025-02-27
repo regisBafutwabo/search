@@ -3,22 +3,55 @@
 @theme {
   --font-sans: var(--font-sf-pro-text);
   --font-mono: var(--font-geist-mono);
+
+  /* Colors */
+  --color-bd-default: #C2C6CE;
+  --color-bd-hover: #959CA6;
+  --color-bd-active: #00C3CC;
+  --color-liner-gray: #F2F3F7;
+}
+
+@layer components {
+  .search-box {
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0%;
+    font-weight: 400;
+  }
+
+  .error-modal-title {
+    font-size: 20px;
+    line-height: 23.87px;
+    letter-spacing: 0%;
+    font-weight: 700;
+  }
+
+  .card-header {
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    font-weight: 700;
+  }
+
+  .card-link {
+    font-size: 13px;
+    line-height: 13px;
+    letter-spacing: 0%;
+    font-weight: 400;
+  }
+
+  .button {
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0%;
+    font-weight: 700;
+  }
 }
 
 :root {
   --background: #ffffff;
   --foreground: #33373D;
-  /* --bd-default: #C2C6CE;
-  --bd-hover: #959CA6;
-  --bd-active: #00C3CC; */
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1e1e1f;
-    --foreground: #ffffff;
-  }
-} */
 
 body {
   color: var(--foreground);
