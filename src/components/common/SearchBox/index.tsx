@@ -11,7 +11,7 @@ type SearchBoxProps = {
   value: string;
   fullWidth?: boolean;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  onResetInput: () => void;
+  onResetInput?: () => void;
   onEnter: () => void;
 };
 
