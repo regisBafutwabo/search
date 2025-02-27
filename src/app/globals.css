@@ -9,41 +9,44 @@
   --color-bd-hover: #959CA6;
   --color-bd-active: #00C3CC;
   --color-liner-gray: #F2F3F7;
+  --color-liner-focus: #F8F9FB;
+  --color-modal-bg: rgba(51, 55, 61, 0.5)
 }
 
 @layer components {
   .search-box {
     font-size: 16px;
     line-height: 16px;
-    letter-spacing: 0%;
+    letter-spacing: normal;
     font-weight: 400;
   }
 
   .error-modal-title {
     font-size: 20px;
     line-height: 23.87px;
-    letter-spacing: 0%;
+    letter-spacing: normal;
     font-weight: 700;
   }
 
   .card-header {
     font-size: 15px;
     line-height: 20px;
-    letter-spacing: 0%;
+    letter-spacing: normal;
     font-weight: 700;
   }
 
   .card-link {
     font-size: 13px;
     line-height: 13px;
-    letter-spacing: 0%;
+    letter-spacing: normal;
     font-weight: 400;
+    color: #959CA6;
   }
 
   .button {
     font-size: 14px;
     line-height: 14px;
-    letter-spacing: 0%;
+    letter-spacing: normal;
     font-weight: 700;
   }
 }

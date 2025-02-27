@@ -43,7 +43,7 @@ export const ResultsHeader = () => {
       >
         <button
           type="button"
-          className="w-10 h-10 border-0 rounded-xl p-2 hover:bg-[#F8F9FB] cursor-pointer "
+          className="w-10 h-10 border-0 rounded-xl p-2 hover:bg-liner-focus cursor-pointer "
         >
           <BackIcon />
         </button>

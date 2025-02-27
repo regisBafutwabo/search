@@ -31,6 +31,7 @@ export default function RootLayout({
             <Image
               aria-hidden
               src="/images/globe.svg"
+              unoptimized
               alt="Globe icon"
               width={16}
               height={16}
