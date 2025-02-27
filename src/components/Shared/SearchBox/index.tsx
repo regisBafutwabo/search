@@ -1,11 +1,8 @@
 "use client";
-import {
-  type ChangeEventHandler,
-  useState,
-} from 'react';
+import { type ChangeEventHandler, useState } from "react";
 
-import { FilledCloseIcon } from '../../Icons/FilledCloseIcon';
-import { SearchIcon } from '../../Icons/SearchIcons';
+import { FilledCloseIcon } from "../../Icons/FilledCloseIcon";
+import { SearchIcon } from "../../Icons/SearchIcons";
 
 type SearchBoxProps = {
   value: string;

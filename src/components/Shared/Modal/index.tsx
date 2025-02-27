@@ -1,9 +1,4 @@
-import {
-  type MouseEvent,
-  type ReactNode,
-  useEffect,
-  useRef,
-} from 'react';
+import { type MouseEvent, type ReactNode, useEffect, useRef } from "react";
 
 ("ue client");
 

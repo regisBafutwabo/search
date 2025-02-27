@@ -1,6 +1,6 @@
-import { ErrorModal } from '@/components/ErrorModal';
-import { ResultsHeader } from '@/components/ResultsHeader';
-import { Skeleton } from '@/components/Shared/Skeleton';
+import { ErrorModal } from "@/components/ErrorModal";
+import { ResultsHeader } from "@/components/ResultsHeader";
+import { Skeleton } from "@/components/Shared/Skeleton";
 
 export default function Search() {
   return (
@@ -11,7 +11,7 @@ export default function Search() {
           <Skeleton key={index} />
         ))} */}
         <Skeleton />
-        <ErrorModal/>
+        <ErrorModal />
       </div>
     </div>
   );

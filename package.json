@@ -9,7 +9,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --apply .",
     "format": "biome format .",
-    "format:fix": "biome format --write ."
+    "format:fix": "biome format --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "15.2.0",
@@ -23,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

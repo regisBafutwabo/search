@@ -1,9 +1,9 @@
 "use client";
-import type { MouseEvent } from 'react';
+import type { MouseEvent } from "react";
 
-import Image from 'next/image';
+import Image from "next/image";
 
-import { SaveIcon } from '../Icons/SaveIcon';
+import { SaveIcon } from "../Icons/SaveIcon";
 
 type CardProps = {
   id: string;

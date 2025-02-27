@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { CloseIcon } from '../Icons/CloseIcon';
-import { Modal } from '../Shared/Modal';
+import { CloseIcon } from "../Icons/CloseIcon";
+import { Modal } from "../Shared/Modal";
 
 export const ErrorModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);

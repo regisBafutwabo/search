@@ -1,9 +1,9 @@
-import './globals.css';
+import "./globals.css";
 
-import type { Metadata } from 'next';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Image from "next/image";
 
-import { sfProText } from './fonts';
+import { sfProText } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Liner Challenge",
