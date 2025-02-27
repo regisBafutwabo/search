@@ -1,10 +1,7 @@
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+export default{
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -54,9 +51,12 @@ const config: Config = {
           },
         ],
       },
+      colors: {
+        "bd-default": "var(--bd-default)",
+        "bd-hover": "var(--bd-hover)",
+        "bd-active": "var(--bd-active)"
+      }
     },
   },
   plugins: [],
 };
-
-export default config;

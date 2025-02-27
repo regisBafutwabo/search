@@ -8,15 +8,17 @@
 :root {
   --background: #ffffff;
   --foreground: #33373D;
-  ;
+  /* --bd-default: #C2C6CE;
+  --bd-hover: #959CA6;
+  --bd-active: #00C3CC; */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #1e1e1f;
     --foreground: #ffffff;
   }
-}
+} */
 
 body {
   color: var(--foreground);
