@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Image from "next/image";
 
-import { HomeSearch } from '@/components/HomeSearch';
+import { HomeSearch } from "@/components/HomeSearch";
 
 export const metadata: Metadata = {
   title: "Liner Challenge - Home",

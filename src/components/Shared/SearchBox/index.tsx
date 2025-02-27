@@ -5,10 +5,10 @@ import {
   type KeyboardEvent,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
-import { FilledCloseIcon } from '../../Icons/FilledCloseIcon';
-import { SearchIcon } from '../../Icons/SearchIcons';
+import { FilledCloseIcon } from "../../Icons/FilledCloseIcon";
+import { SearchIcon } from "../../Icons/SearchIcons";
 
 type SearchBoxProps = {
   value: string;

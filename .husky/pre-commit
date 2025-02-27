@@ -1,3 +1,3 @@
-yarn format:fix --verbose
-yarn lint:fix --verbose
+yarn format --verbose
+yarn lint --verbose
 yarn build

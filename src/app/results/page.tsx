@@ -1,6 +1,6 @@
-import { ErrorModal } from '@/components/ErrorModal';
-import { ResultsHeader } from '@/components/ResultsHeader';
-import { Skeleton } from '@/components/Shared/Skeleton';
+import { ErrorModal } from "@/components/ErrorModal";
+import { ResultsHeader } from "@/components/ResultsHeader";
+import { Skeleton } from "@/components/Shared/Skeleton";
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
