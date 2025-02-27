@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { BackIcon } from "../Icons/BackIcon";
-import { SearchBox } from "../Shared/SearchBox";
+import { BackIcon } from "@/components/Icons/BackIcon";
+import { SearchBox } from "@/components/Shared/SearchBox";
 
 type ResultsHeaderProps = {
   searchKey?: string;

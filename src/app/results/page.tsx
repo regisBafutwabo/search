@@ -1,6 +1,5 @@
-import { ErrorModal } from "@/components/ErrorModal";
-import { ResultsHeader } from "@/components/ResultsHeader";
-import { Skeleton } from "@/components/Shared/Skeleton";
+import { ResultContainer } from "./components/ResultContainer";
+import { ResultsHeader } from "./components/ResultsHeader";
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
@@ -22,13 +21,7 @@ export default async function Search(props: {
   return (
     <div className="h-full">
       <ResultsHeader searchKey={searchKey} />
-      <div className="px-5">
-        {/* {Array.from({ length: 10 }, (_, index: number) => (
-          <Skeleton key={index} />
-        ))} */}
-        <Skeleton />
-        <ErrorModal />
-      </div>
+      <ResultContainer searchValue={searchKey} />
     </div>
   );
 }
