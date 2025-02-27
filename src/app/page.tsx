@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
-import { Search } from '@/components/Search';
+import { HomeSearch } from '@/components/HomeSearch';
+
+export const metadata: Metadata = {
+  title: "Liner Challenge - Home",
+};
 
 export default function Home() {
   return (
@@ -13,7 +18,7 @@ export default function Home() {
         width={250}
         height={48}
       />
-      <Search />
+      <HomeSearch />
     </div>
   );
 }

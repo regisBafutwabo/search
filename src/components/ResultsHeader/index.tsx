@@ -1,16 +1,28 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { BackIcon } from "../Icons/BackIcon";
 import { SearchBox } from "../Shared/SearchBox";
 
-export const ResultsHeader = () => {
-  const [value, setValue] = useState("");
+type ResultsHeaderProps = {
+  searchKey?: string;
+};
+
+export const ResultsHeader = ({ searchKey }: ResultsHeaderProps) => {
+  const router = useRouter();
+
+  const [value, setValue] = useState(searchKey || "");
   const [showBorder, setShowBorder] = useState(false);
 
   const observerRef = useRef<HTMLDivElement>(null);
 
   const handleSearch = () => {};
+
+  const goBack = () => {
+    router.back();
+  };
 
   useEffect(() => {
     if (!observerRef.current) return;
@@ -39,6 +51,7 @@ export const ResultsHeader = () => {
       >
         <button
           type="button"
+          onClick={goBack}
           className="w-10 h-10 border-0 rounded-xl p-2 hover:bg-liner-focus cursor-pointer "
         >
           <BackIcon />
