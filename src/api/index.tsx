@@ -24,33 +24,36 @@ export const getContents = async ({
   return response.json();
 };
 
-export const bookmarkContent = async ({
-  documentId,
-}: BookmarkContentParams) => {
+export const bookmarkContent = async (documentId: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/collection/document/${documentId}`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ documentId }),
     },
   );
-  if (!response.ok) throw new Error("Failed to bookmark document");
-  return response.json();
+
+  if (response.status === 401) {
+    throw new Error("Unauthorized: you don't have access");
+  }
+
+  if (!response.ok) throw new Error("Oops! Failed to bookmark the content");
+
+  return response.text();
 };
 
-export const removeBookmark = async ({ documentId }: RemoveBookmarkParams) => {
+export const removeBookmark = async (documentId: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/collection/document/${documentId}`,
     {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     },
   );
-  if (!response.ok) throw new Error("Failed to remove the bookmark");
-  return response.json();
+
+  if (response.status === 401) {
+    throw new Error("Unauthorized: you don't have access");
+  }
+
+  if (!response.ok) throw new Error("Oops! Failed to remove the bookmark");
+
+  return response.text();
 };

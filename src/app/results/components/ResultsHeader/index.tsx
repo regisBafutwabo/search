@@ -18,7 +18,9 @@ export const ResultsHeader = ({ searchKey }: ResultsHeaderProps) => {
 
   const observerRef = useRef<HTMLDivElement>(null);
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    router.push(`/results?search=${encodeURIComponent(value.trim())}`);
+  };
 
   const goBack = () => {
     router.back();
@@ -44,7 +46,12 @@ export const ResultsHeader = ({ searchKey }: ResultsHeaderProps) => {
     <>
       <div
         ref={observerRef}
-        style={{ height: "0px", width: "100%", position: "absolute", top: 0 }}
+        style={{
+          height: "0px",
+          width: "100%",
+          position: "absolute",
+          top: 0,
+        }}
       />
       <div
         className={`flex bg-white items-center pl-8 gap-3 h-20 sticky top-0 z-10 ${showBorder ? "border-b border-liner-gray" : ""}`}

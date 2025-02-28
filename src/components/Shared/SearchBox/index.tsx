@@ -29,14 +29,15 @@ export const SearchBox = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && value.trim() !== "") {
+      event.preventDefault();
       onEnter();
+      inputRef.current?.blur();
     }
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    onEnter();
   };
 
   const handleReset = () => {
@@ -65,7 +66,7 @@ export const SearchBox = ({
         maxLength={100}
       />
       {value && fullWidth && (
-        <button type="reset" className="cursor-pointer" onClick={handleReset}>
+        <button type="button" className="cursor-pointer" onClick={handleReset}>
           <FilledCloseIcon />
         </button>
       )}
