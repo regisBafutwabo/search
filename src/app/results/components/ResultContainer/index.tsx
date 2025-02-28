@@ -1,4 +1,5 @@
 "use client";
+import { getContents } from "@/api";
 import { Card } from "@/components/Card";
 import type { DocumentType } from "@/types/api";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -21,11 +22,12 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
   } = useInfiniteQuery({
     queryKey: ["search-results", searchValue],
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await fetch(
-        `https://frontend.assignment.getliner.com/search/documents?query=${searchValue}&size=20&from=${pageParam}`,
-      );
-      if (!response.ok) throw new Error("Failed to fetch documents");
-      return response.json();
+      const params = {
+        searchValue: searchValue || "",
+        size: 20,
+        from: pageParam,
+      };
+      return getContents(params);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) =>
@@ -34,6 +36,7 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
   });
 
   const documents = data?.pages[0]?.documents;
+
   return (
     <div className="px-5">
       {isFetching && !data && <Skeletons count={20} />}
