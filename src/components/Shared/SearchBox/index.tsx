@@ -50,7 +50,7 @@ export const SearchBox = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex gap-4 items-center h-12 border rounded-[1000px] px-4 py-3 ${isFocused ? "border-bd-active caret-bd-active border-[1.5px]" : "border-bd-default hover:border-bd-hover"} ${fullWidth ? "w-[644px]" : "w-[560px]"}`}
+      className={`flex gap-4 items-center h-12 border rounded-[1000px] px-4 py-3 w-full ${isFocused ? "border-bd-active caret-bd-active border-[1.5px]" : "border-bd-default hover:border-bd-hover"} ${fullWidth ? "sm:w-[644px]" : "sm:w-[560px]"}`}
     >
       {!fullWidth && <SearchIcon active={isFocused} />}
       <input

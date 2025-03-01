@@ -9,11 +9,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col h-full justify-center items-center gap-20">
+    <div className="flex flex-col h-full justify-center items-center gap-20 px-2 sm:px-0">
       <Image
         src="/images/logo.svg"
         unoptimized
-        priority
         alt="logo"
         width={250}
         height={48}
