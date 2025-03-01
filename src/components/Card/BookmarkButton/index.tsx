@@ -1,13 +1,13 @@
 import type { MouseEvent } from "react";
 
-import { SaveIcon } from "@/components/Icons/SaveIcon";
+import { SaveIcon } from "@/components/Svg/SaveIcon";
 
-type SaveButtonProps = {
+type BookmarkButtonProps = {
   onSave: (event: MouseEvent<HTMLButtonElement>) => void;
   isSaved: boolean;
 };
 
-export const SaveButton = ({ onSave, isSaved }: SaveButtonProps) => {
+export const BookmarkButton = ({ onSave, isSaved }: BookmarkButtonProps) => {
   return (
     <button
       type="button"

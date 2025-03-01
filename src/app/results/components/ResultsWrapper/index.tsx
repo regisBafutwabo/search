@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import { ResultContainer } from "../ResultContainer";
-import { ResultsHeader } from "../ResultsHeader";
+import { ResultSearch } from "../ResultSearch";
 
 type ResultsWrapperProps = {
   searchKey?: string;
@@ -14,7 +14,7 @@ export function ResultsWrapper({ searchKey, timestamp }: ResultsWrapperProps) {
 
   return (
     <>
-      <ResultsHeader searchKey={searchKey} showBorder={showHeaderBorder} />
+      <ResultSearch searchKey={searchKey} showBorder={showHeaderBorder} />
       <ResultContainer
         searchValue={searchKey}
         timestamp={timestamp}

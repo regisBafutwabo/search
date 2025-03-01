@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { Logo } from "@/components/Icons/Logo";
+import { Logo } from "@/components/Svg/Logo";
 
 export default function RootError({
   error,

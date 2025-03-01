@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { SearchBox } from "../Shared/SearchBox";
+import { SearchBox } from "@/components/SearchBox";
 
 export const HomeSearch = () => {
   const route = useRouter();

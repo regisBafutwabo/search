@@ -7,8 +7,8 @@ import {
   useState,
 } from "react";
 
-import { FilledCloseIcon } from "../../Icons/FilledCloseIcon";
-import { SearchIcon } from "../../Icons/SearchIcons";
+import { FilledCloseIcon } from "@/components/Svg/FilledCloseIcon";
+import { SearchIcon } from "@/components/Svg/SearchIcons";
 
 type SearchBoxProps = {
   value: string;

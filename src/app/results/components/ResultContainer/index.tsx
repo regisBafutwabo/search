@@ -6,6 +6,7 @@ import { Virtuoso } from "react-virtuoso";
 
 import { Card } from "@/components/Card";
 import { ErrorModal } from "@/components/ErrorModal";
+import { Skeletons } from "@/components/Skeletons";
 import { bookmarkContent, getContents, removeBookmark } from "@/lib/api";
 import type { DocumentType } from "@/types/api";
 import {
@@ -13,8 +14,6 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-
-import { Skeletons } from "../Skeletons";
 
 type ResultContainerProps = {
   searchValue?: string;

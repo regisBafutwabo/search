@@ -3,8 +3,8 @@ import type { MouseEvent } from "react";
 
 import type { DocumentType } from "@/types/api";
 
+import { BookmarkButton } from "./BookmarkButton";
 import { CardDetails } from "./CardDetails";
-import { SaveButton } from "./SaveButton";
 
 interface CardProps extends DocumentType {
   handleSave: () => void;
@@ -30,7 +30,7 @@ export const Card = (props: CardProps) => {
         faviconUrl={faviconUrl}
         imageUrl={imageUrl}
       />
-      <SaveButton isSaved={isSaved} onSave={onSave} />
+      <BookmarkButton isSaved={isSaved} onSave={onSave} />
     </div>
   );
 };

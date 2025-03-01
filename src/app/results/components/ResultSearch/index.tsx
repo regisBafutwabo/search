@@ -3,18 +3,15 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { BackIcon } from "@/components/Icons/BackIcon";
-import { SearchBox } from "@/components/Shared/SearchBox";
+import { SearchBox } from "@/components/SearchBox";
+import { BackIcon } from "@/components/Svg/BackIcon";
 
 type ResultsHeaderProps = {
   searchKey?: string;
   showBorder: boolean;
 };
 
-export const ResultsHeader = ({
-  searchKey,
-  showBorder,
-}: ResultsHeaderProps) => {
+export const ResultSearch = ({ searchKey, showBorder }: ResultsHeaderProps) => {
   const router = useRouter();
 
   const [value, setValue] = useState(searchKey || "");

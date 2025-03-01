@@ -1,4 +1,4 @@
-import { Logo } from "@/components/Icons/Logo";
+import { Logo } from "@/components/Svg/Logo";
 
 const NotFoundPage = () => {
   return (

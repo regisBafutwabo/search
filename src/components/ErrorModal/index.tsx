@@ -1,7 +1,8 @@
 "use client";
 
-import { CloseIcon } from "../Icons/CloseIcon";
-import { Modal } from "../Shared/Modal";
+import { useEffect, useRef } from "react";
+
+import { CloseIcon } from "../Svg/CloseIcon";
 
 type ErroModalProps = {
   isOpen: boolean;
@@ -10,8 +11,24 @@ type ErroModalProps = {
 };
 
 export const ErrorModal = ({ isOpen, message, onClose }: ErroModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (isOpen) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+  }, [isOpen]);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <dialog
+      ref={dialogRef}
+      className="h-full flex items-center bg-transparent justify-center p-0 backdrop:bg-modal-bg mx-auto"
+    >
       <div className="flex flex-col justify-between w-[360px] h-40 p-6 border border-liner-gray rounded-[20px] drop-shadow-[0px 2px 24px rgba(39, 43, 49, 0.20)] bg-white ">
         <div className="flex items-center justify-between">
           <div className="error-modal-title text-black">
@@ -35,6 +52,6 @@ export const ErrorModal = ({ isOpen, message, onClose }: ErroModalProps) => {
           </button>
         </div>
       </div>
-    </Modal>
+    </dialog>
   );
 };
