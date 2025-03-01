@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { EmptySearchResult } from "@/components/EmptyResult";
 import { ErrorModal } from "@/components/ErrorModal";
 import { Skeletons } from "@/components/Skeletons";
-import { VirtualList } from "@/components/VirtualList";
 import { useBookmarkMutations } from "@/services/bookmarkService";
 import { useDocumentSearch } from "@/services/contentService";
+
+import { EmptySearchResult } from "../EmptyResult";
+import { VirtualList } from "../VirtualList";
 
 type ResultContainerProps = {
   searchValue?: string;

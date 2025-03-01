@@ -1,5 +1,5 @@
 import { bookmarkContent, removeBookmark } from "@/lib/api";
-import type { DocumentType, InfinteQueryDataType } from "@/types/api";
+import type { DocumentType, InfiniteQueryDataType } from "@/types/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // Service for bookmark mutations
@@ -9,7 +9,7 @@ export function useBookmarkMutations(searchValue?: string, timestamp?: string) {
   const updateBookmarkInCache = (documentId: string, isSaved: boolean) => {
     queryClient.setQueryData(
       ["search-results", searchValue, timestamp],
-      (oldData: InfinteQueryDataType) => {
+      (oldData: InfiniteQueryDataType) => {
         if (!oldData) return oldData;
 
         return {

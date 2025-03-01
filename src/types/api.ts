@@ -8,7 +8,7 @@ export interface DocumentType {
   isSaved: boolean;
 }
 
-export type InfinteQueryDataType = {
+export type InfiniteQueryDataType = {
   pages: Array<{ documents: Array<DocumentType> }>;
   pageParams: number[];
 };

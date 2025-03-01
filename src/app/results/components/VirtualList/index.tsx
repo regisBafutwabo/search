@@ -2,15 +2,14 @@ import { useCallback } from "react";
 
 import { Virtuoso } from "react-virtuoso";
 
+import { Card } from "@/components/Card";
+import { Skeletons } from "@/components/Skeletons";
 import type { DocumentType } from "@/types/api";
 import type {
   FetchNextPageOptions,
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
-
-import { Card } from "../Card";
-import { Skeletons } from "../Skeletons";
 
 type VirtualListProps = {
   documents: DocumentType[];
