@@ -13,6 +13,7 @@ export const getContents = async ({
     `${process.env.NEXT_PUBLIC_API_URL}/search/documents?query=${searchValue}&size=${size}&from=${from}`,
   );
   if (!response.ok) throw new Error("Failed to fetch contents");
+
   return response.json();
 };
 

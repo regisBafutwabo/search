@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Virtuoso } from "react-virtuoso";
 
-import { bookmarkContent, getContents, removeBookmark } from "@/api";
 import { Card } from "@/components/Card";
 import { ErrorModal } from "@/components/ErrorModal";
+import { bookmarkContent, getContents, removeBookmark } from "@/lib/api";
 import type { DocumentType } from "@/types/api";
 import {
   useInfiniteQuery,
