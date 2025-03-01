@@ -15,7 +15,11 @@ export const HomeSearch = () => {
 
     if (!trimmedValue) return;
 
-    route.push(`/results?search=${encodeURIComponent(value.trim())}`);
+    const timestamp = Date.now();
+
+    route.push(
+      `/results?search=${encodeURIComponent(trimmedValue)}&timestamp=${timestamp}`,
+    );
   };
 
   return (

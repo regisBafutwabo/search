@@ -4,11 +4,11 @@ type CardDetailsProps = {
   imageUrl?: string | null;
   faviconUrl?: string | null;
   netloc: string;
-  isSaved: boolean;
+  url: string;
 };
 
 export const CardDetails = (props: CardDetailsProps) => {
-  const { id, title, imageUrl, faviconUrl, netloc } = props;
+  const { id, title, imageUrl, faviconUrl, netloc, url } = props;
 
   const defaultThumbnail = "/images/default-thumbnail.svg";
   const defaultFavicon = "/images/globe.svg";
@@ -19,7 +19,7 @@ export const CardDetails = (props: CardDetailsProps) => {
       <div className="w-18 h-18">
         <img
           src={imageUrl || defaultThumbnail}
-          className="min-w-18 max-w-18 min-h-18 max-h-18 object-cover rounded-xl"
+          className="h-full w-full min-h-18 min-w-18 object-cover rounded-xl"
           onError={(e) => {
             e.currentTarget.src = defaultThumbnail;
           }}
@@ -30,9 +30,14 @@ export const CardDetails = (props: CardDetailsProps) => {
       {/* Title and Link */}
       <div className="flex flex-col justify-between gap-[14px]">
         {/* Title */}
-        <div className="card-header h-10">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="card-header h-10"
+        >
           <p className="text-ellipsis overflow-hidden line-clamp-2">{title}</p>
-        </div>
+        </a>
         {/* Link */}
         <div className="flex items-center gap-[6px]">
           <img
@@ -43,7 +48,7 @@ export const CardDetails = (props: CardDetailsProps) => {
             onError={(e) => {
               e.currentTarget.src = defaultFavicon;
             }}
-            className="w-[14px] h-[14px] rounded-full object-cover "
+            className="w-[14px] h-[14px] rounded-full object-cover min-w-[14px] min-h-[14px]"
             loading="lazy"
           />
           <p className="card-link">{netloc}</p>

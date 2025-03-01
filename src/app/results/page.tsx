@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { ResultContainer } from "./components/ResultContainer";
-import { ResultsHeader } from "./components/ResultsHeader";
+import { ResultsWrapper } from "./components/ResultsWrapper";
 
 type SearchParams = Promise<{
   [key: string]: string | undefined;
@@ -23,13 +22,13 @@ export default async function ResultsPage(props: {
 }) {
   const searchParams = await props.searchParams;
   const searchKey = searchParams.search;
+  const timestamp = searchParams.timestamp;
 
   if (searchKey === "") redirect("/");
 
   return (
-    <div className="h-full relative">
-      <ResultsHeader searchKey={searchKey} />
-      <ResultContainer searchValue={searchKey} />
+    <div className="h-full">
+      <ResultsWrapper searchKey={searchKey} timestamp={timestamp} />
     </div>
   );
 }

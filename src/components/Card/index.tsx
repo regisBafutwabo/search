@@ -21,21 +21,16 @@ export const Card = (props: CardProps) => {
   };
 
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-between rounded-2xl pl-5 pr-3 py-4 hover:bg-liner-focus bg-white cursor-pointer"
-    >
+    <div className="flex items-center justify-between rounded-2xl pl-5 pr-3 py-4 hover:bg-liner-focus bg-white cursor-pointer w-full">
       <CardDetails
         id={id}
+        url={url}
         title={title}
         netloc={netloc}
-        isSaved={isSaved}
         faviconUrl={faviconUrl}
         imageUrl={imageUrl}
       />
       <SaveButton isSaved={isSaved} onSave={onSave} />
-    </a>
+    </div>
   );
 };

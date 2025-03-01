@@ -30,10 +30,8 @@ export const Modal = (props: ModalProps) => {
     if (!onBackdropClose) return;
 
     if (event?.target === dialogRef.current && onBackdropClose) {
-      console.log("WE HERE");
       onClose();
     } else {
-      console.log("Target", event?.target === dialogRef.current, event?.target);
       onClose();
     }
   };

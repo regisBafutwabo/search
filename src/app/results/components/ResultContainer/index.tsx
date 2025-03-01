@@ -1,8 +1,12 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { useRouter } from "next/navigation";
+import { Virtuoso } from "react-virtuoso";
+
 import { bookmarkContent, getContents, removeBookmark } from "@/api";
 import { Card } from "@/components/Card";
+import { ErrorModal } from "@/components/ErrorModal";
 import type { DocumentType } from "@/types/api";
 import {
   useInfiniteQuery,
@@ -14,30 +18,37 @@ import { Skeletons } from "../Skeletons";
 
 type ResultContainerProps = {
   searchValue?: string;
+  timestamp?: string;
+  onScroll: (scrollTop: number) => void;
 };
 
-type InfinteQueryTypes = {
+type InfinteQueryDataType = {
   pages: Array<{ documents: Array<DocumentType> }>;
   pageParams: number[];
 };
 
-export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+export const ResultContainer = ({
+  searchValue,
+  onScroll,
+  timestamp,
+}: ResultContainerProps) => {
+  const router = useRouter();
+
+  const parentRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
 
   const [errorModalOpen, setErrorModalOpen] = useState(false);
 
   const {
     data,
+    status,
     error,
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    status,
   } = useInfiniteQuery({
-    queryKey: ["search-results", searchValue],
+    queryKey: ["search-results", searchValue, timestamp],
     queryFn: async ({ pageParam = 0 }) => {
       const params = {
         searchValue: searchValue || "",
@@ -58,6 +69,7 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
     },
     enabled: !!searchValue,
     refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   // Mutations for bookmark actions
@@ -66,13 +78,13 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
     onMutate: async (documentId) => {
       // Optimistic update
       await queryClient.cancelQueries({
-        queryKey: ["search-results", searchValue],
+        queryKey: ["search-results", searchValue, timestamp],
       });
 
       // Update document in the cache
       queryClient.setQueryData(
-        ["search-results", searchValue],
-        (oldData: InfinteQueryTypes) => {
+        ["search-results", searchValue, timestamp],
+        (oldData: InfinteQueryDataType) => {
           return {
             pages: oldData.pages.map((page) => ({
               ...page,
@@ -91,8 +103,8 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
       // Revert on error
       if (context) {
         queryClient.setQueryData(
-          ["search-results", searchValue],
-          (oldData: InfinteQueryTypes) => {
+          ["search-results", searchValue, timestamp],
+          (oldData: InfinteQueryDataType) => {
             return {
               pages: oldData.pages.map((page) => ({
                 ...page,
@@ -107,6 +119,7 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
 
         // Show error modal
         setErrorModalOpen(true);
+        // setErrorMessage(err.message || "");
       }
     },
   });
@@ -116,12 +129,12 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
     onMutate: async (documentId) => {
       // Optimistic update
       await queryClient.cancelQueries({
-        queryKey: ["search-results", searchValue],
+        queryKey: ["search-results", searchValue, timestamp],
       });
 
       queryClient.setQueryData(
-        ["search-results", searchValue],
-        (oldData: InfinteQueryTypes) => {
+        ["search-results", searchValue, timestamp],
+        (oldData: InfinteQueryDataType) => {
           return {
             pages: oldData.pages.map((page) => ({
               ...page,
@@ -140,8 +153,8 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
       // Revert on error
       if (context) {
         queryClient.setQueryData(
-          ["search-results", searchValue],
-          (oldData: InfinteQueryTypes) => {
+          ["search-results", searchValue, timestamp],
+          (oldData: InfinteQueryDataType) => {
             return {
               pages: oldData.pages.map((page) => ({
                 ...page,
@@ -160,11 +173,7 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
     },
   });
 
-  const handleObserver = useCallback(() => {
-    if (hasNextPage && !isFetchingNextPage && searchValue) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, searchValue]);
+  const allDocuments = data?.pages.flatMap((page) => page?.documents) || [];
 
   // Handle the save/unsave functionality
   const handleSave = useCallback(
@@ -178,73 +187,100 @@ export const ResultContainer = ({ searchValue }: ResultContainerProps) => {
     [saveMutation, unsaveMutation],
   );
 
-  useEffect(() => {
-    const currentRef = loadMoreRef.current;
+  // Handle Error Modal Close
+  const handleCloseModal = () => {
+    setErrorModalOpen(false);
+  };
 
-    if (currentRef) {
-      observerRef.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0]?.isIntersecting) {
-            handleObserver();
-          }
-        },
-        { threshold: 0.1, rootMargin: "200px" },
+  const renderItem = useCallback(
+    (index: number) => {
+      const document = allDocuments[index];
+      return (
+        <Card
+          id={document.id}
+          key={document.id}
+          title={document.title}
+          imageUrl={document?.imageUrl}
+          isSaved={document.isSaved}
+          netloc={document.netloc}
+          url={document.url}
+          faviconUrl={document?.faviconUrl}
+          handleSave={() => handleSave(document?.id, document?.isSaved)}
+        />
       );
+    },
+    [allDocuments, handleSave],
+  );
 
-      observerRef.current.observe(currentRef);
+  const handleScroll = (ref: HTMLElement | Window | null) => {
+    if (ref) {
+      const scrollHandler = () => {
+        requestAnimationFrame(() => {
+          onScroll((ref as HTMLElement).scrollTop);
+        });
+      };
+
+      ref.addEventListener("scroll", scrollHandler, { passive: true });
+      return () => {
+        ref.removeEventListener("scroll", scrollHandler);
+      };
     }
-
-    return () => {
-      if (observerRef.current && currentRef) {
-        observerRef.current.unobserve(currentRef);
-      }
-    };
-  }, [handleObserver]);
+  };
 
   useEffect(() => {
-    if (!searchValue) return;
-
-    window.scrollTo(0, 0);
-  }, [searchValue]);
-
-  const allDocuments = data?.pages.flatMap((page) => page.documents) || [];
+    if (error) {
+      setErrorModalOpen(true);
+    }
+  }, [error]);
 
   return (
-    <div className="px-5 relative">
-      {isFetching && !data && <Skeletons count={20} />}
+    <div
+      className="sm:px-5 relative w-full"
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
+      {((isFetching && !data) || (!data && errorModalOpen)) && (
+        <Skeletons count={10} />
+      )}
 
       {allDocuments?.length > 0 ? (
-        <div>
-          {allDocuments?.map((document: DocumentType) => (
-            <Card
-              id={document.id}
-              key={document.id}
-              title={document.title}
-              imageUrl={document?.imageUrl}
-              isSaved={document.isSaved}
-              netloc={document.netloc}
-              url={document.url}
-              faviconUrl={document?.faviconUrl}
-              handleSave={() => handleSave(document?.id, document?.isSaved)}
-            />
-          ))}
-
-          {/* Intersection observer */}
-          <div ref={loadMoreRef} className="h-10 w-full" aria-hidden="true" />
-
-          {/* Loading indicator for next page */}
-          {isFetchingNextPage && <Skeletons count={5} />}
-        </div>
+        <Virtuoso
+          style={{
+            height: "100vh",
+            width: "100%",
+          }}
+          totalCount={allDocuments.length}
+          overscan={200}
+          endReached={() => {
+            if (hasNextPage && !isFetchingNextPage) {
+              fetchNextPage();
+            }
+          }}
+          computeItemKey={(index) =>
+            allDocuments[index]?.id || `loading-${index}`
+          }
+          scrollerRef={handleScroll}
+          itemContent={renderItem}
+          components={{
+            Footer: () =>
+              hasNextPage && !error ? <Skeletons count={2} /> : null,
+          }}
+          initialScrollTop={0}
+        />
       ) : (
-        // Show no results message, but only if we've attempted a search
         searchValue &&
-        !isFetching && (
-          <div className="text-center py-10">
+        !isFetching &&
+        !errorModalOpen && (
+          <div className="text-center py-10 px-2">
             <p className="text-gray-500">
-              No results found for "{searchValue}"
+              {error
+                ? `Something went wrong while searching for "${searchValue}".`
+                : `No results found for "${searchValue}".`}
             </p>
           </div>
         )
+      )}
+      {errorModalOpen && (
+        <ErrorModal isOpen={errorModalOpen} onClose={handleCloseModal} />
       )}
     </div>
   );

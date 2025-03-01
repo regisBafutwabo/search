@@ -4,14 +4,6 @@ type GetContentsParams = {
   from: number;
 };
 
-type BookmarkContentParams = {
-  documentId: string;
-};
-
-type RemoveBookmarkParams = {
-  documentId: string;
-};
-
 export const getContents = async ({
   searchValue,
   size,
@@ -31,14 +23,13 @@ export const bookmarkContent = async (documentId: string) => {
       method: "POST",
     },
   );
-
   if (response.status === 401) {
     throw new Error("Unauthorized: you don't have access");
   }
 
   if (!response.ok) throw new Error("Oops! Failed to bookmark the content");
 
-  return response.text();
+  return response.status === 200 && response.text();
 };
 
 export const removeBookmark = async (documentId: string) => {
@@ -55,5 +46,5 @@ export const removeBookmark = async (documentId: string) => {
 
   if (!response.ok) throw new Error("Oops! Failed to remove the bookmark");
 
-  return response.text();
+  return response.status === 200 && response.text();
 };
