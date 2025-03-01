@@ -7,3 +7,8 @@ export interface DocumentType {
   netloc: string;
   isSaved: boolean;
 }
+
+export type InfinteQueryDataType = {
+  pages: Array<{ documents: Array<DocumentType> }>;
+  pageParams: number[];
+};

@@ -30,7 +30,7 @@ export const bookmarkContent = async (documentId: string) => {
 
   if (!response.ok) throw new Error("Oops! Failed to bookmark the content");
 
-  return response.status === 200 && response.text();
+  return response.text();
 };
 
 export const removeBookmark = async (documentId: string) => {
@@ -47,5 +47,5 @@ export const removeBookmark = async (documentId: string) => {
 
   if (!response.ok) throw new Error("Oops! Failed to remove the bookmark");
 
-  return response.status === 200 && response.text();
+  return response.text();
 };
