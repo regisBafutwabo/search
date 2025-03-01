@@ -64,6 +64,7 @@ export const SearchBox = ({
         onKeyDown={handleKeyDown}
         aria-label="Search input"
         maxLength={100}
+        type="search"
       />
       {value && fullWidth && (
         <button type="button" className="cursor-pointer" onClick={handleReset}>

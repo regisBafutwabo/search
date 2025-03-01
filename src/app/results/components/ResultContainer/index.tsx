@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ErrorModal } from "@/components/ErrorModal";
 import { Skeletons } from "@/components/Skeletons";
@@ -37,23 +37,28 @@ export const ResultContainer = ({
 
   const allDocuments = data?.pages.flatMap((page) => page?.documents) || [];
   const hasDocuments = allDocuments.length > 0;
-  const showSkeletons = (isFetching && !data) || (!data && errorModalOpen);
-  const showEmptyState = searchValue && !isFetching && !data && !errorModalOpen;
+  const showSkeletons =
+    (isFetching && !hasDocuments) || (!hasDocuments && errorModalOpen);
+  const showEmptyState =
+    searchValue && !isFetching && !hasDocuments && !errorModalOpen;
 
-  const handleScroll = (ref: HTMLElement | Window | null) => {
-    if (ref) {
-      const scrollHandler = () => {
-        requestAnimationFrame(() => {
-          onScroll((ref as HTMLElement).scrollTop);
-        });
-      };
+  const handleScroll = useCallback(
+    (ref: HTMLElement | Window | null) => {
+      if (ref) {
+        const scrollHandler = () => {
+          requestAnimationFrame(() => {
+            onScroll((ref as HTMLElement).scrollTop);
+          });
+        };
 
-      ref.addEventListener("scroll", scrollHandler, { passive: true });
-      return () => {
-        ref.removeEventListener("scroll", scrollHandler);
-      };
-    }
-  };
+        ref.addEventListener("scroll", scrollHandler, { passive: true });
+        return () => {
+          ref.removeEventListener("scroll", scrollHandler);
+        };
+      }
+    },
+    [onScroll],
+  );
 
   const handleCloseModal = () => {
     setErrorModalOpen(false);
