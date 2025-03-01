@@ -3,7 +3,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import { sfProText } from "./fonts";
-import { Preconnect } from "./preconnect";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
@@ -19,7 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Preconnect />
+        <link
+          rel="preconnect"
+          href={`${process.env.NEXT_PUBLIC_API_URL}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${sfProText.variable} font-sf-pro-text`}>
         <Providers>
