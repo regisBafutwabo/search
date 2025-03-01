@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import Image from "next/image";
+import { Logo } from "@/components/Icons/Logo";
 
 export default function RootError({
   error,
@@ -17,15 +17,9 @@ export default function RootError({
 
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-4">
-      <Image
-        src="/images/logo.svg"
-        unoptimized
-        alt="logo"
-        width={250}
-        height={48}
-      />
+      <Logo />
       <h2>Unexpected Error Was caught!</h2>
-      <button type="button" className="modal-button" onClick={() => reset()}>
+      <button type="button" className="p-3" onClick={() => reset()}>
         Try again
       </button>
     </div>
