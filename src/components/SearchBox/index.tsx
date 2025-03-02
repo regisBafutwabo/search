@@ -29,6 +29,11 @@ export const SearchBox = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    // For korean,chinese, or Japanese
+    if (event.nativeEvent.isComposing || event.key === "unidentified") {
+      return;
+    }
+
     if (event.key === "Enter" && value.trim() !== "") {
       event.preventDefault();
       onEnter();
