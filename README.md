@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Liner Challenge
+
+## TL;DR
+
+A responsive search interface built with Next.js 15, React 19, TypeScript, and Tailwind(v4) CSS. Features include infinite scrolling with virtualized lists, bookmark functionality, and comprehensive error handling.
+
+[Demo](liner-challenge.vercel.app)
+
+## Overview
+
+This project is a search interface built using modern web technologies. It enables users to search for content, view results in an optimized virtual list, and bookmark items of interest.
+
+## Tech Stack
+
+**Framework**: Next.js 15 with App Router for routing and server components
+
+**Language**: TypeScript for type safety
+
+**Styling**: Tailwind(v4) for utility-first styling
+
+**Data Fetching**: TanStack Query (formerly React Query) for data fetching, caching, and state management
+
+**List Virtualization**: React Virtuoso for efficient rendering of large lists
+
+**Linting/Formatting**: Biome for linting and code formatting
+
+**Git Hooks**: Husky for pre-commit hooks
+
+## Key Features
+
+- Search functionality with ``Enter`` key support
+- ``Infinite scrolling`` with virtualized list for performance
+- Bookmark/unbookmark functionality with React-query's ``optimistic updates``
+- Error handling with ``dialog`` feedback
+- Responsive design
+- ``Image fallbacks`` for failed favicon/thumbnail
+- ``Loading skeletons`` during content fetching
+
+## Project Structure
+
+```plaintext
+src/
+├── app/                    # Next.js App Router files
+│   ├── (home)/             # Home page route
+│   ├── results/            # Search results route
+│   │   ├── components/     # Results page components
+│   │   └── page.tsx        # Results page component
+│   ├── error.tsx           # Global error handling
+│   ├── layout.tsx          # Root layout
+│   └── providers.tsx       # React context providers
+├── components/             # Shared UI components
+│   ├── Card/               # Content card components
+│   ├── ErrorModal/         # Error display modal
+│   ├── SearchBox/          # Search input component
+│   ├── Skeletons/          # Loading placeholders
+│   └── Svg/                # SVG icons
+├── lib/                    # Utility libraries
+│   └── api/                # API functions
+├── services/               # Service layer
+│   ├── bookmarkService.ts  # Bookmark management
+│   └── contentService.ts   # Content fetching
+├── styles/                 # Global styles
+└── types/                  # TypeScript types
+    └── api.ts              # API-related types
+```
+
+## Implementation Details
+
+### API Integration (`src/lib/api/index.ts`)
+
+The application interacts with three main API endpoints:
+
+- `(GET) - getContents`: Fetches contens based on search query.
+
+- `(POST) - bookmarkContent`: Bookmark content.
+
+- `(DELETE) - removeBookmark`: Deletes a bookmarked content.
+
+### Search Implementation
+
+- Search is triggered on `Enter` key press
+- Results are fetched using TanStack Query's `useInfiniteQuery`
+- Pagination is handled through the `from` parameter in the API
+
+### Virtualization
+
+Implemented using React Virtuoso to efficiently render only the visible items in the search results list, significantly improving performance for large result sets.
+
+### Bookmark Management
+
+- `Optimistic updates` for immediate UI feedback
+- Error handling with `automatic state rollback` if API calls fail
+- Modal feedback for error conditions
+
+### Error Handling
+
+- `Error boundaries` for **unexpected runtime errors**
+- API error handling with user feedback via `modals`
+- `Fallback images` for failed image loading
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Node.js 18+ and Yarn
+
+### Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/liner-challenge.git
+
+cd liner-challenge
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Set up environment variables
 
-## Learn More
+```bash
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+Edit .env.local with your API keys and configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Start the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+yarn dev
+```
