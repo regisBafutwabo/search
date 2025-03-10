@@ -4,7 +4,7 @@
 
 A responsive search interface built with Next.js 15, React 19, TypeScript, and Tailwind(v4) CSS. Features include infinite scrolling with virtualized lists, bookmark functionality, and comprehensive error handling.
 
-[Demo](liner-challenge.vercel.app)
+[Demo](https://liner-challenge.vercel.app)
 
 ## Overview
 
@@ -107,7 +107,7 @@ Node.js 18+ and Yarn
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/liner-challenge.git
+git clone https://github.com/regisBafutwabo/liner-challenge.git
 
 cd liner-challenge
 ```
