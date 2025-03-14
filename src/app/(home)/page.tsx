@@ -5,7 +5,7 @@ import { Logo } from "@/components/Svg/Logo";
 import { HomeSearch } from "./components/HomeSearch";
 
 export const metadata: Metadata = {
-  title: "Liner Challenge - Home",
+  title: "Search - Home",
 };
 
 export default function Home() {

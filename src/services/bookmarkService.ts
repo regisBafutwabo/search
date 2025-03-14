@@ -1,4 +1,4 @@
-import { bookmarkContent, removeBookmark } from "@/lib/api";
+import { useBookmarkStore } from "@/lib/store/bookmarkStore";
 import type { DocumentType, InfiniteQueryDataType } from "@/types/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -26,11 +26,16 @@ export function useBookmarkMutations(searchValue?: string, timestamp?: string) {
   };
 
   const createBookmarkMutation = (
-    mutationFn: (documentId: string) => Promise<string>,
+    mutationFn: (documentId: string) => void,
     newSavedState: boolean,
   ) => {
     return useMutation({
-      mutationFn,
+      mutationFn: (documentId: string) => {
+        // Use the local store function instead of API call
+        mutationFn(documentId);
+        // Return a resolved promise to maintain the same interface
+        return Promise.resolve();
+      },
       onMutate: async (documentId) => {
         await queryClient.cancelQueries({
           queryKey: ["search-results", searchValue, timestamp],
@@ -65,8 +70,11 @@ export function useBookmarkMutations(searchValue?: string, timestamp?: string) {
     });
   };
 
+  // Get bookmark store functions
+  const { addBookmark, removeBookmark } = useBookmarkStore();
+
   // Save mutation
-  const saveMutation = createBookmarkMutation(bookmarkContent, true);
+  const saveMutation = createBookmarkMutation(addBookmark, true);
 
   // Unsave mutation
   const unsaveMutation = createBookmarkMutation(removeBookmark, false);

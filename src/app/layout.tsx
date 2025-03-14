@@ -6,15 +6,8 @@ import { sfProText } from "./fonts";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Liner Challenge",
-  description: "Liner Frontend Assignment",
-  openGraph: {
-    type: "website",
-    url: `${process.env.NEXT_PUBLIC_URL}`,
-    title: "Liner Challenge",
-    description: "Liner Frontend Assignment",
-    images: [{ url: "/images/og_image.png", alt: "Liner Logo" }],
-  },
+  title: "Search",
+  description: "Search Interface",
 };
 
 export default function RootLayout({

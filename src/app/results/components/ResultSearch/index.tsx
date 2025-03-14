@@ -33,12 +33,12 @@ export const ResultSearch = ({ searchKey, showBorder }: ResultsHeaderProps) => {
 
   return (
     <div
-      className={`flex bg-white items-center sm:px-8 gap-3 h-20 sticky top-0 z-10 border-b ${showBorder ? " border-liner-gray " : "border-transparent"}`}
+      className={`flex bg-white items-center sm:px-8 gap-3 h-20 sticky top-0 z-10 border-b ${showBorder ? " border-search-gray " : "border-transparent"}`}
     >
       <button
         type="button"
         onClick={goBack}
-        className="w-10 h-10 border-0 rounded-xl p-2 hover:bg-liner-focus cursor-pointer "
+        className="w-10 h-10 border-0 rounded-xl p-2 hover:bg-search-focus cursor-pointer "
       >
         <BackIcon />
       </button>
