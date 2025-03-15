@@ -13,7 +13,7 @@ export async function generateMetadata(props: {
   const searchKey = searchParams.search;
 
   return {
-    title: `Liner - ${searchKey}`,
+    title: `Search - ${searchKey}`,
   };
 }
 

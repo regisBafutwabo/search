@@ -1,8 +1,9 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { ErrorModal } from "@/components/ErrorModal";
 import { Skeletons } from "@/components/Skeletons";
+import { useBookmarkStore } from "@/lib/store/bookmarkStore";
 import { useBookmarkMutations } from "@/services/bookmarkService";
 import { useDocumentSearch } from "@/services/contentService";
 
@@ -21,6 +22,7 @@ export const ResultContainer = ({
   timestamp,
 }: ResultContainerProps) => {
   const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [currentError, setCurrentError] = useState<unknown>(null);
 
   const {
     data,
@@ -34,8 +36,19 @@ export const ResultContainer = ({
     searchValue,
     timestamp,
   );
+  console.log("hasNextpage", hasNextPage, isFetchingNextPage);
+  const { isBookmarked } = useBookmarkStore();
 
-  const allDocuments = data?.pages.flatMap((page) => page?.documents) || [];
+  const allDocuments = useMemo(() => {
+    // Apply actual bookmark status from Zustand store
+    return (data?.pages.flatMap((page) => page?.documents) || []).map(
+      (doc) => ({
+        ...doc,
+        isSaved: isBookmarked(doc.id),
+      }),
+    );
+  }, [data?.pages, isBookmarked]);
+
   const hasDocuments = allDocuments.length > 0;
   const showSkeletons =
     (isFetching && !hasDocuments) || (!hasDocuments && errorModalOpen);
@@ -65,7 +78,11 @@ export const ResultContainer = ({
   };
 
   useEffect(() => {
-    if (error || bookmarkError) {
+    if (error) {
+      setCurrentError(error);
+      setErrorModalOpen(true);
+    } else if (bookmarkError) {
+      setCurrentError(bookmarkError);
       setErrorModalOpen(true);
     }
   }, [error, bookmarkError]);
@@ -89,7 +106,11 @@ export const ResultContainer = ({
       )}
 
       {errorModalOpen && (
-        <ErrorModal isOpen={errorModalOpen} onClose={handleCloseModal} />
+        <ErrorModal
+          isOpen={errorModalOpen}
+          error={currentError}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );

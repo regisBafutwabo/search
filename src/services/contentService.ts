@@ -7,7 +7,7 @@ export function useDocumentSearch(searchValue?: string, timestamp?: string) {
     queryFn: async ({ pageParam = 0 }) => {
       const params = {
         searchValue: searchValue || "",
-        size: 20,
+        size: 10,
         from: pageParam,
       };
       return getContents(params);

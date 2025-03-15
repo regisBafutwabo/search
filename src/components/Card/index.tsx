@@ -21,7 +21,7 @@ export const Card = (props: CardProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between rounded-2xl pl-5 pr-3 py-4 hover:bg-liner-focus bg-white cursor-pointer w-full">
+    <div className="flex items-center justify-between rounded-2xl pl-5 pr-3 py-4 hover:bg-search-focus bg-white cursor-pointer w-full">
       <CardDetails
         id={id}
         url={url}

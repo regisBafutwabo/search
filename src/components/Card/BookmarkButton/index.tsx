@@ -12,7 +12,7 @@ export const BookmarkButton = ({ onSave, isSaved }: BookmarkButtonProps) => {
     <button
       type="button"
       onClick={onSave}
-      className="cursor-pointer hover:bg-liner-gray p-2 rounded-xl"
+      className="cursor-pointer hover:bg-search-gray p-2 rounded-xl"
     >
       <SaveIcon active={isSaved} />
     </button>
