@@ -33,7 +33,7 @@ export const ResultSearch = ({ searchKey, showBorder }: ResultsHeaderProps) => {
 
   return (
     <div
-      className={`flex bg-white items-center sm:px-8 gap-3 h-20 sticky top-0 z-10 border-b ${showBorder ? " border-search-gray " : "border-transparent"}`}
+      className={`flex bg-white items-center sm:px-8 gap-0 sm:gap-3 h-20 sticky top-0 z-10 border-b ${showBorder ? " border-search-gray " : "border-transparent"}`}
     >
       <button
         type="button"
