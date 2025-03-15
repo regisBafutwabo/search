@@ -34,38 +34,11 @@ export function getErrorDetails(error: unknown): ErrorState {
     };
   }
 
-  // Handle unauthorized errors
-  if (err.status === 401) {
-    return {
-      title: "Authorization required",
-      message: "You need to be logged in to perform this action.",
-      suggestion: "Please log in and try again.",
-    };
-  }
-
-  // Handle not found errors
-  if (err.status === 404) {
-    return {
-      title: "Not found",
-      message: "The requested resource could not be found.",
-      suggestion: "Please check your query and try again.",
-    };
-  }
-
-  // Handle bad request errors
-  if (err.status === 400) {
-    return {
-      title: "Invalid request",
-      message: "Your request couldn't be processed.",
-      suggestion: "Please check your input and try again.",
-    };
-  }
-
   // Handle server errors
   if (err.status === 500 || err.status === 502 || err.status === 503) {
     return {
       title: "Server error",
-      message: "Our servers are experiencing issues.",
+      message: "The servers are experiencing issues.",
       suggestion: "Please try again later.",
     };
   }
@@ -77,7 +50,7 @@ export function getErrorDetails(error: unknown): ErrorState {
   ) {
     return {
       title: "Network error",
-      message: "Couldn't connect to our servers.",
+      message: "Couldn't connect to the servers.",
       suggestion: "Please check your internet connection and try again.",
     };
   }
